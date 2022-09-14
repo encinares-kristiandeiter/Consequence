@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.scss';
-import { Action, Crouch, Eat, Jump } from './app/actions';
+import { Action, Crouch, Eat, Jump, Sleep } from './app/actions';
 
 function App() {
   const [actions, setActions] = useState<Action[]>([]);
@@ -18,7 +18,7 @@ function App() {
 
   const execute = () => {
     actions.reduce(async (chain, currentAction) => {
-      return chain.then(await currentAction.event)
+      return chain.then(await new Promise<any>(currentAction.function))
     }, Promise.resolve()).finally(clearActions)
   }
 
@@ -35,6 +35,7 @@ function App() {
           <div className='Action' onClick={() => addAction(Eat)}>Eat</div>
           <div className='Action' onClick={() => addAction(Jump)}>Jump</div>
           <div className='Action' onClick={() => addAction(Crouch)}>Crouch</div>
+          <div className='Action' onClick={() => addAction(Sleep)}>Sleep</div>
         </div>
         <div id='Execute' onClick={execute}>Execute</div>
       </header>

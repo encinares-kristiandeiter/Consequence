@@ -1,39 +1,41 @@
 export type Action = {
     name: string,
-    event: Promise<any>
-}
-
-export const Sleep: Action = {
-    name: 'Sleep',
-    event: new Promise<any>(resolve => {
-        console.log('Sleep');
-        resolve('Sleep');
-    })
+    function: (value: any) => void
 }
 
 export const Eat: Action = 
 {
     name: 'Eat',
-    event: new Promise<any>(resolve => {
-        console.log('Eat');
-        resolve('Eat');
-    })
+    function: resolve => { 
+        console.log('Eat')
+        resolve(); 
+    }
 }
 
 export const Jump: Action = 
 {
     name: 'Jump',
-    event: new Promise<any>(resolve => {
-        console.log('JUmp');
-        resolve('JUmp');
-    })
+    function: resolve => { 
+        console.log('Jump')
+        resolve(); 
+    }
 }
 
 export const Crouch: Action =
 {
     name: 'Crouch',
-    event: new Promise<any>(resolve => {
-        console.log('Crouch');
-        resolve('Crouch');
-    })
+    function: resolve => { 
+        console.log('Crouch')
+        resolve(); 
+    }
+}
+
+export const Sleep: Action = {
+    name: 'Sleep',
+    function: resolve => { 
+        setTimeout(() => { 
+            console.log('Sleep')
+            resolve(); 
+        }, 1000) 
+    }
 }
